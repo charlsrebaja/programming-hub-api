@@ -4,6 +4,7 @@ import type { Lesson } from "@/data/lessons";
 import { lessons } from "@/data/lessons";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import Prism from "prismjs";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-python";
@@ -11,15 +12,63 @@ import "prismjs/components/prism-javascript";
 import "prismjs/components/prism-css";
 import "prismjs/components/prism-markup";
 
+interface UserProgress {
+  completedLessons: string[];
+  lastVisited: string | null;
+  totalPoints: number;
+}
+
 export default function LessonContent({ lesson }: { lesson: Lesson }) {
+  const { data: session } = useSession();
   const [isCompleted, setIsCompleted] = useState(false);
   const [showHint, setShowHint] = useState<number | null>(null);
   const [currentSnippetIndex, setCurrentSnippetIndex] = useState(0);
   const router = useRouter();
 
+  // Load completion status on mount
+  useEffect(() => {
+    if (session?.user?.email) {
+      const savedProgress = localStorage.getItem(
+        `progress_${session.user.email}`
+      );
+      if (savedProgress) {
+        const progress: UserProgress = JSON.parse(savedProgress);
+        setIsCompleted(progress.completedLessons.includes(lesson.id));
+      }
+    }
+  }, [session, lesson.id]);
+
   const markAsCompleted = () => {
-    setIsCompleted(true);
-    // Here you would also update this in your database/backend
+    if (!session?.user?.email) return;
+
+    const savedProgress = localStorage.getItem(
+      `progress_${session.user.email}`
+    );
+    const currentProgress: UserProgress = savedProgress
+      ? JSON.parse(savedProgress)
+      : {
+          completedLessons: [],
+          lastVisited: null,
+          totalPoints: 0,
+        };
+
+    // Only update if not already completed
+    if (!currentProgress.completedLessons.includes(lesson.id)) {
+      const newProgress: UserProgress = {
+        ...currentProgress,
+        completedLessons: [...currentProgress.completedLessons, lesson.id],
+        lastVisited: lesson.id,
+        totalPoints: currentProgress.totalPoints + lesson.points,
+      };
+
+      // Save to localStorage
+      localStorage.setItem(
+        `progress_${session.user.email}`,
+        JSON.stringify(newProgress)
+      );
+
+      setIsCompleted(true);
+    }
   };
 
   const nextLesson = lessons.find((l) => l.order === lesson.order + 1);
@@ -179,17 +228,48 @@ export default function LessonContent({ lesson }: { lesson: Lesson }) {
                   ? "Great job completing this lesson! 🎉"
                   : "Ready to mark this lesson as completed?"}
               </p>
-              <button
-                onClick={markAsCompleted}
-                disabled={isCompleted}
-                className={`w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  isCompleted
-                    ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 cursor-not-allowed"
-                    : "bg-gradient-to-r from-blue-600 to-violet-600 text-white hover:from-blue-700 hover:to-violet-700"
-                }`}
-              >
-                {isCompleted ? "Completed!" : "Mark as Completed"}
-              </button>
+              {session ? (
+                <button
+                  onClick={markAsCompleted}
+                  disabled={isCompleted}
+                  className={`w-full py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                    isCompleted
+                      ? "bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 cursor-not-allowed"
+                      : "bg-gradient-to-r from-blue-600 to-violet-600 text-white hover:from-blue-700 hover:to-violet-700"
+                  }`}
+                >
+                  {isCompleted ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      Completed!
+                    </span>
+                  ) : (
+                    "Mark as Completed"
+                  )}
+                </button>
+              ) : (
+                <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                  Please{" "}
+                  <button
+                    onClick={() => router.push("/login")}
+                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    sign in
+                  </button>{" "}
+                  to track your progress
+                </p>
+              )}
             </div>
           </div>
         </div>

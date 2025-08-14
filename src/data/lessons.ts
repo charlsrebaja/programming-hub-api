@@ -29,31 +29,53 @@ export const lessons: Lesson[] = [
     order: 1,
     videoUrl: "https://www.youtube.com/embed/zOjov-2OZ0E",
     content: `
-# Introduction to Programming
+Introduction to Programming
 
-Programming is the art of instructing computers to perform specific tasks. In this lesson, we'll explore fundamental concepts that form the building blocks of programming.
+Programming is the process of giving instructions to computers to perform specific tasks. In this lesson, we’ll explore the fundamental concepts that form the foundation of programming.
 
-## Key Concepts
+Key Concepts
 
-1. **Variables and Data Types**
-   - Think of variables as containers that store information
-   - Different types of data: numbers, text (strings), true/false (boolean)
+Variables and Data Types
 
-2. **Control Flow**
-   - Making decisions in code (if/else statements)
-   - Repeating actions (loops)
+Variables are like containers that hold information.
 
-3. **Functions**
-   - Reusable blocks of code
-   - Input → Processing → Output
+Common data types include:
 
-## Why Programming?
+Numbers (e.g., 10, 3.14)
 
-Programming allows you to:
-- Solve complex problems
-- Automate repetitive tasks
-- Create useful applications
-- Express creativity through code
+Text or strings (e.g., "Hello World")
+
+Boolean values (true/false)
+
+Control Flow
+
+Control flow determines the order in which code executes.
+
+Examples:
+
+Decision making: if/else statements
+
+Repetition: loops (for, while)
+
+Functions
+
+Functions are reusable blocks of code that perform a specific task.
+
+They take input, process it, and produce output.
+
+Example: a function to calculate the area of a rectangle.
+
+Why Learn Programming?
+
+Programming empowers you to:
+
+Solve complex problems efficiently
+
+Automate repetitive or tedious tasks
+
+Build useful applications and tools
+
+Express creativity through code
     `,
     codeSnippets: [
       {

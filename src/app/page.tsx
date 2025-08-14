@@ -21,10 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-    if (session) {
-      router.push("/lessons");
-    }
-  }, [session, router]);
+  }, []);
 
   if (!mounted) return null;
 
@@ -73,22 +70,45 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  onClick={() => router.push("/login")}
-                  className="relative group overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                >
-                  <span className="relative z-10">Get Started Now</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  onClick={() => router.push("/about")}
-                  className="border-2 hover:-translate-y-1 transition-transform duration-300"
-                >
-                  Learn More
-                </Button>
+                {session ? (
+                  <>
+                    <Button
+                      size="lg"
+                      onClick={() => router.push("/lessons")}
+                      className="relative group overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    >
+                      <span className="relative z-10">Continue Learning</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => router.push("/profile")}
+                      className="border-2 hover:-translate-y-1 transition-transform duration-300"
+                    >
+                      View Profile
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      size="lg"
+                      onClick={() => router.push("/login")}
+                      className="relative group overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                    >
+                      <span className="relative z-10">Get Started Now</span>
+                      <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={() => router.push("/about")}
+                      className="border-2 hover:-translate-y-1 transition-transform duration-300"
+                    >
+                      Learn More
+                    </Button>
+                  </>
+                )}
               </div>
 
               {/* Statistics */}
@@ -373,10 +393,12 @@ export default function Home() {
           <div className="text-center mt-16">
             <Button
               size="lg"
-              onClick={() => signIn("google")}
+              onClick={() =>
+                session ? router.push("/lessons") : signIn("google")
+              }
               className="bg-gradient-to-r from-blue-600 to-violet-600 text-white hover:opacity-90 transition-opacity"
             >
-              Start Your Journey Now
+              {session ? "Continue Your Journey" : "Start Your Journey Now"}
             </Button>
           </div>
         </div>
