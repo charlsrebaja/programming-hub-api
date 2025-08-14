@@ -1,29 +1,26 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { NextAuthOptions, User } from "next-auth";
+import { NextAuthOptions, User, Account, Profile } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./prisma";
 import { compare } from "bcrypt";
+import { Adapter } from "next-auth/adapters";
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
+  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
     signIn: "/login",
+    error: "/login", // Error code passed in query string as ?error=
   },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      authorization: {
-        params: {
-          prompt: "consent",
-          access_type: "offline",
-          response_type: "code",
-        },
-      },
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -39,13 +36,6 @@ export const authOptions: NextAuthOptions = {
         const user = await prisma.user.findUnique({
           where: {
             email: credentials.email,
-          },
-          select: {
-            id: true,
-            email: true,
-            password: true,
-            name: true,
-            image: true,
           },
         });
 
@@ -72,30 +62,27 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: ({ session, token }) => {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.sub,
-        },
-      };
+    signIn: async ({ user, account, profile }) => {
+      if (!user.email) {
+        return false;
+      }
+      return true;
     },
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user, account }) => {
       if (user) {
-        return {
-          ...token,
-          id: user.id,
-        };
+        token.id = user.id;
+        token.email = user.email;
       }
       return token;
     },
-    redirect: async ({ url, baseUrl }) => {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
+    session: async ({ session, token }) => {
+      if (token && session.user) {
+        session.user = {
+          ...session.user,
+          id: token.id as string,
+        };
+      }
+      return session;
     },
   },
 };
