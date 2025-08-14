@@ -43,7 +43,7 @@ export default function Navigation() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="sticky top-0 z-50 w-full  bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -67,11 +67,12 @@ export default function Navigation() {
             <>
               <Button
                 variant="ghost"
-                className="hover:bg-gradient-to-r hover:from-blue-600/10 hover:to-violet-600/10"
+                className="border border-gray-300 hover:bg-gradient-to-r hover:from-blue-600/10 hover:to-violet-600/10"
                 onClick={() => router.push("/login")}
               >
                 Sign In
               </Button>
+
               <Button
                 className="bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 transition-opacity text-white"
                 onClick={() => router.push("/register")}

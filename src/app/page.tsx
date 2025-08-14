@@ -102,7 +102,7 @@ export default function Home() {
                     <Button
                       size="lg"
                       variant="outline"
-                      onClick={() => router.push("/about")}
+                      onClick={() => router.push("/")}
                       className="border-2 hover:-translate-y-1 transition-transform duration-300"
                     >
                       Learn More
@@ -169,7 +169,7 @@ export default function Home() {
                       <div className="relative group">
                         <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
                         <Image
-                          src="/images/hero-code.png"
+                          src="/images/hero-code1.png"
                           alt="Programming Interface"
                           width={480}
                           height={320}
@@ -199,103 +199,95 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-4 bg-white dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
-              Why Choose Our Platform?
-            </h2>
-            <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Experience a new way of learning programming with our innovative
-              features
-            </p>
+<section className="py-24 px-4 bg-white dark:from-gray-900 dark:to-gray-800">
+  <div className="container mx-auto">
+    <div className="text-center mb-16">
+      <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
+        Why Choose Our Platform?
+      </h2>
+      <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        Experience a new way of learning programming with our innovative features
+      </p>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <Card className="group shadow-md hover:shadow-xl transition-all duration-300 border-0">
+        <CardHeader className="space-y-4">
+          <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span className="text-4xl">💻</span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
-              <CardHeader className="space-y-4">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-4xl">💻</span>
-                </div>
-                <CardTitle className="text-center text-xl">
-                  Learn by Doing
-                </CardTitle>
-                <CardDescription className="text-center">
-                  <div className="space-y-2">
-                    <p>Interactive coding exercises and real-world projects</p>
-                    <ul className="text-sm text-left space-y-1 mt-4">
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Hands-on coding
-                        challenges
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Real-time code execution
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Project-based learning
-                      </li>
-                    </ul>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
+          <CardTitle className="text-center text-xl">Learn by Doing</CardTitle>
+          <CardDescription className="text-center">
+            <div className="space-y-2">
+              <p>Interactive coding exercises and real-world projects</p>
+              <ul className="text-sm text-left space-y-1 mt-4">
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Hands-on coding challenges
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Real-time code execution
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Project-based learning
+                </li>
+              </ul>
+            </div>
+          </CardDescription>
+        </CardHeader>
+      </Card>
 
-            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
-              <CardHeader className="space-y-4">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-4xl">🤝</span>
-                </div>
-                <CardTitle className="text-center text-xl">
-                  Collaborate
-                </CardTitle>
-                <CardDescription className="text-center">
-                  <div className="space-y-2">
-                    <p>Work with peers and learn from the community</p>
-                    <ul className="text-sm text-left space-y-1 mt-4">
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Peer programming
-                        sessions
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Community discussions
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Code reviews
-                      </li>
-                    </ul>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
-              <CardHeader className="space-y-4">
-                <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-4xl">📊</span>
-                </div>
-                <CardTitle className="text-center text-xl">
-                  Track Progress
-                </CardTitle>
-                <CardDescription className="text-center">
-                  <div className="space-y-2">
-                    <p>Monitor your learning journey with detailed analytics</p>
-                    <ul className="text-sm text-left space-y-1 mt-4">
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Progress visualization
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Skill assessments
-                      </li>
-                      <li className="flex items-center">
-                        <span className="mr-2">✓</span> Achievement badges
-                      </li>
-                    </ul>
-                  </div>
-                </CardDescription>
-              </CardHeader>
-            </Card>
+      <Card className="group shadow-md hover:shadow-xl transition-all duration-300 border-0">
+        <CardHeader className="space-y-4">
+          <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span className="text-4xl">🤝</span>
           </div>
-        </div>
-      </section>
+          <CardTitle className="text-center text-xl">Collaborate</CardTitle>
+          <CardDescription className="text-center">
+            <div className="space-y-2">
+              <p>Work with peers and learn from the community</p>
+              <ul className="text-sm text-left space-y-1 mt-4">
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Peer programming sessions
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Community discussions
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Code reviews
+                </li>
+              </ul>
+            </div>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      <Card className="group shadow-md hover:shadow-xl transition-all duration-300 border-0">
+        <CardHeader className="space-y-4">
+          <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <span className="text-4xl">📊</span>
+          </div>
+          <CardTitle className="text-center text-xl">Track Progress</CardTitle>
+          <CardDescription className="text-center">
+            <div className="space-y-2">
+              <p>Monitor your learning journey with detailed analytics</p>
+              <ul className="text-sm text-left space-y-1 mt-4">
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Progress visualization
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Skill assessments
+                </li>
+                <li className="flex items-center">
+                  <span className="mr-2">✓</span> Achievement badges
+                </li>
+              </ul>
+            </div>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+    </div>
+  </div>
+</section>
+
 
       {/* How It Works Section */}
       <section className="py-24 px-4 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900">
@@ -414,8 +406,8 @@ export default function Home() {
                 <Image
                   src="/images/logo.png"
                   alt="Logo"
-                  width={40}
-                  height={40}
+                  width={50}
+                  height={50}
                 />
                 <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
                   Programming Hub
