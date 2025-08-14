@@ -33,28 +33,153 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="py-20 px-4 text-center bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
-            Learn, Create, and Explore through Code
-          </h1>
-          <p className="text-xl mb-8 text-gray-600 dark:text-gray-300">
-            Hands-on lessons for future programmers
-          </p>
-          <div className="flex items-center justify-center gap-4 flex-wrap">
-            <Button
-              size="lg"
-              onClick={() => router.push("/login")}
-              className="animate-fade-in cursor-pointer bg-gradient-to-r from-blue-600 to-violet-600 hover:opacity-90 transition-opacity text-white"
-            >
-              Get Started Now
-            </Button>
+      <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -left-4 -top-4 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-blob"></div>
+          <div className="absolute -right-4 -top-4 w-72 h-72 bg-violet-500 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div className="container relative mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left column - Text content */}
+            <div className="text-left space-y-8">
+              <div className="space-y-4">
+                <div className="inline-block">
+                  <span className="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold bg-gradient-to-r from-blue-500/10 to-violet-500/10 text-blue-600 dark:text-blue-400">
+                    <svg
+                      className="mr-1.5 h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-1-7.208a2.5 2.5 0 111.384-3.291A2.5 2.5 0 0111 12.792z" />
+                    </svg>
+                    Interactive Learning Platform
+                  </span>
+                </div>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
+                    Learn, Create, and
+                  </span>
+                  <span className="block bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-pink-600">
+                    Explore through Code
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-xl">
+                  Master programming through hands-on lessons, real-world
+                  projects, and interactive challenges.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  onClick={() => router.push("/login")}
+                  className="relative group overflow-hidden bg-gradient-to-r from-blue-600 to-violet-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                >
+                  <span className="relative z-10">Get Started Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => router.push("/about")}
+                  className="border-2 hover:-translate-y-1 transition-transform duration-300"
+                >
+                  Learn More
+                </Button>
+              </div>
+
+              {/* Statistics */}
+              <div className="grid grid-cols-3 gap-4 pt-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
+                    1000+
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Lessons
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-pink-600">
+                    50K+
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Students
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-blue-600">
+                    98%
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    Success Rate
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right column - Illustration */}
+            <div className="relative hidden lg:block">
+              <div className="relative w-full h-[600px]">
+                {/* Background decorative element */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-violet-500/10 rounded-3xl transform rotate-3 transition-transform duration-300 hover:rotate-0"></div>
+
+                {/* Main container */}
+                <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden">
+                  {/* Code editor header */}
+                  <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <div className="px-3 py-1 text-sm bg-gray-200 dark:bg-gray-700 rounded text-gray-600 dark:text-gray-300">
+                        main.py
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content area */}
+                  <div className="p-6 space-y-6">
+                    {/* Main Image */}
+                    <div className="flex justify-center items-center p-6">
+                      <div className="relative group">
+                        <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-1000 group-hover:duration-200"></div>
+                        <Image
+                          src="/images/hero-code.png"
+                          alt="Programming Interface"
+                          width={480}
+                          height={320}
+                          className="rounded-xl shadow-2xl transform transition-all duration-500 group-hover:scale-[1.01]"
+                          priority
+                        />
+                      </div>
+                    </div>
+
+                    {/* Interactive elements */}
+                    <div className="absolute bottom-6 right-6 left-6">
+                      <div className="bg-gradient-to-r from-blue-500/10 to-violet-500/10 rounded-xl p-4 backdrop-blur-sm">
+                        <div className="flex items-center gap-3">
+                          <div className="w-2 h-8 bg-blue-500 rounded-full animate-pulse"></div>
+                          <div className="text-sm font-medium text-gray-800 dark:text-gray-200">
+                            Interactive Learning Environment
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-24 px-4 bg-white  dark:from-gray-900 dark:to-gray-800">
+      <section className="py-24 px-4 bg-white dark:from-gray-900 dark:to-gray-800">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-violet-600">
@@ -66,7 +191,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-blue-500 dark:hover:border-blue-400">
+            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
               <CardHeader className="space-y-4">
                 <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">💻</span>
@@ -94,7 +219,7 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-violet-500 dark:hover:border-violet-400">
+            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
               <CardHeader className="space-y-4">
                 <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">🤝</span>
@@ -122,7 +247,7 @@ export default function Home() {
               </CardHeader>
             </Card>
 
-            <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-indigo-500 dark:hover:border-indigo-400">
+            <Card className="group shadow-md hover:shadow-xl transition-all duration-300">
               <CardHeader className="space-y-4">
                 <div className="w-16 h-16 mx-auto mb-2 bg-gradient-to-r from-blue-600 to-violet-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-4xl">📊</span>
